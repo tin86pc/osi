@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi" id="root">
+  <head>
+    <title>Cài đặt Osi</title>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      name="viewport"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .m {
+        position: absolute;
+        width: 320px;
+
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -30%);
+      }
+      .t {
+        position: absolute;
+        left: 0;
+      }
+      .p {
+        position: absolute;
+        right: 0;
+        width: 50%;
+      }
+      .g {
+        position: absolute;
+        width: 50%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+      }
+      ul {
+        list-style: none;
+        text-align: center;
+      }
+      li {
+        display: inline-block;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="m">
+      <label class="t" for="tf">Tên wifi phát:</label>
+      <input class="p" id="tf" value="1" />
+      <br /><br />
+
+      <label for="pf">Pass wifi phát:</label>
+      <input class="p" id="pf" value="2" />
+      <br /><br />
+
+      <label for="ipf">Địa chỉ Ip phát:</label>
+      <input class="p" id="ipf" value="192.168.4.1" />
+      <br /><br />
+
+      <label for="chonWifi">Chọn wifi bắt:</label>
+      <select class="p" id="chonWifi">
+        <option value="">Chọn wifi</option>
+      </select>
+      <br /><br />
+
+      <label for="tb">Tên wifi bắt:</label>
+      <input class="p" id="tb" value="3" />
+      <br /><br />
+
+      <label for="pb">Pass wifi bắt:</label>
+      <input class="p" id="pb" value="4" />
+      <br /><br />
+
+      <label for="ipb">Địa chỉ Ip bắt:</label>
+      <input class="p" id="ipb" value="192.168.4.1" />
+
+      <br /><br />
+
+      <button class="g" id="ok">ok lưu</button>
+
+      <br /><br />
+
+      <ul>
+        <li>
+          <a href="/">Trang chủ</a>
+        </li>
+        <li>
+          <a href="/u">Update</a>
+        </li>
+        <li>
+          <a href="/r">Restart</a>
+        </li>
+      </ul>
+    </div>
+
+    <script src="setting.js" type="module"></script>
+  </body>
+</html>
