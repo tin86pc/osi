@@ -1,6 +1,7 @@
 "use strict";
 import { toast, htnut, ghijson } from "./1ham.js";
 import { option } from "./2bieudo.js";
+import { send } from "./5sk.js";
 
 document.getElementById("caidat").addEventListener("click", () => {
   window.open("/s", "_blank");
@@ -12,6 +13,7 @@ document.getElementById("ok").addEventListener("click", () => {
   if (isNaN(parseFloat(nck))) {
     return;
   }
+  send(nck);
 
   toast("Đã lưu tần số lấy mẫu " + nck + " Hz");
 });

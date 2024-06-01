@@ -1,57 +1,16 @@
-void capNhat()
-{
-  // String nd = "H" + huong;
-  // webSocket.broadcastTXT(nd);
-}
+
 
 void batdauketnoi()
 {
   Serial.println("bat dau ket noi. ");
   webSocket.broadcastTXT("bat dau ket noi. ");
-
-  capNhat();
 }
 
 void xulylenh(String s)
 {
-  // String sv = s.substring(1);
-  // int iv = sv.toInt();
-
-  // if (s.startsWith("l"))
-  // {
-  //   if (iv == 0)
-  //   {
-  //     huong = "P";
-  //   }
-  //   if (iv == 1)
-  //   {
-  //     huong = "R";
-  //   }
-  //   if (iv == 2)
-  //   {
-  //     huong = "N";
-  //   }
-  //   if (iv == 3)
-  //   {
-  //     huong = "D";
-  //   }
-  //   capNhat();
-  // }
-
-  // if (s.startsWith("g"))
-  // {
-  //   datTocDo(iv);
-  // }
-
-  // if (s.startsWith("v"))
-  // {
-  //   setServo(iv);
-  // }
-
-  // if (s.startsWith("s"))
-  // {
-  //   Serial.println("luu vao eeprom ok");
-  // }
+  int iv = s.toInt();
+  Serial.println(iv);
+  tglm=iv;
 }
 
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)

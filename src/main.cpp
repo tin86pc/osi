@@ -9,6 +9,7 @@
 ESP8266WebServer sv(80);
 ESP8266HTTPUpdateServer u;      // nạp chương trình qua wifi
 WebSocketsServer webSocket(81); // create a websocket server on port 81
+int tglm=1000;
 
 #include "data.h"
 #include "ham.h"
@@ -192,6 +193,7 @@ void startServer()
   sv.begin();
 }
 
+
 void led()
 {
   pinMode(2, OUTPUT);
@@ -226,5 +228,5 @@ void loop()
 {
   webSocket.loop();
   sv.handleClient();
-  nhay(1000, led);
+  nhay(tglm, led);
 }
