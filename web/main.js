@@ -1,6 +1,6 @@
 "use strict";
-import { toast, htnut, ghijson } from "./1ham.js";
-import { option } from "./2bieudo.js";
+import { toast, htnut, ghijson, ngay } from "./1ham.js";
+import { option, dljson,moJson } from "./2bieudo.js";
 import { send } from "./5sk.js";
 
 document.getElementById("caidat").addEventListener("click", () => {
@@ -47,3 +47,14 @@ document.getElementById("pan").addEventListener("click", (e) => {
   const v = htnut(e.target.id);
   option("pan", v);
 });
+
+document.getElementById("luu").addEventListener("click", (e) => {
+  toast("Lưu");
+  dljson();
+});
+
+document.getElementById("mo").addEventListener("click", (e) => {
+  toast("Mở");
+  moJson();
+});
+

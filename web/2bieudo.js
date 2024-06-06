@@ -1,11 +1,12 @@
 // https://codepen.io/lirik90/pen/rNLqMVg
 import { send, skSocket } from "./5sk.js";
-import { toast, htnut } from "./1ham.js";
+import { toast, htnut, ngay } from "./1ham.js";
 
 var ctx = document.getElementById("chart").getContext("2d");
 
 const mauA = "rgb(54, 162, 235)";
 const mauB = "rgb(255, 99, 132)";
+let offline = false;
 // data
 let dt = {
   datasets: [
@@ -119,6 +120,7 @@ var chart = new Chart(ctx, cf);
 const start = Date.now();
 
 function xuly(s) {
+  if (offline) return;
   // kiểm tra chuỗi json hợp lệ
   try {
     JSON.parse(s);
@@ -189,4 +191,54 @@ function option(s, v) {
   update();
 }
 
-export { option };
+function dljson() {
+  var obj = { a: dt.datasets[0].data, b: dt.datasets[1].data };
+  console.log(obj);
+
+  var dataStr =
+    "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+
+  console.log(dataStr);
+  var e = document.createElement("a");
+  e.setAttribute("href", dataStr);
+  e.setAttribute("download", ngay() + ".json");
+  document.body.appendChild(e);
+  e.click();
+  e.remove();
+}
+
+function moJson() {
+  console.log("mở json");
+  offline = true;
+
+  
+
+  chart.data.datasets[0].data = [];
+  chart.data.datasets[1].data = [];
+
+  var input = document.createElement("input");
+  input.type = "file";
+  input.accept = "application/json";
+
+  input.addEventListener("change", (event) => {
+    var reader = new FileReader();
+    reader.onload = onReaderLoad;
+    reader.readAsText(event.target.files[0]);
+  });
+
+  input.click();
+
+  function onReaderLoad(event) {
+    var obj = JSON.parse(event.target.result);
+    console.log(obj.a);
+
+    chart.data.datasets[0].data.push(obj.a);
+    chart.data.datasets[1].data.push(obj.b);
+
+    console.log(chart.data);
+  }
+
+  // chart.update();
+}
+
+export { option, dljson, moJson };
