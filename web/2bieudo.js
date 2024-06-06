@@ -211,8 +211,6 @@ function moJson() {
   console.log("mở json");
   offline = true;
 
-  
-
   chart.data.datasets[0].data = [];
   chart.data.datasets[1].data = [];
 
@@ -230,15 +228,12 @@ function moJson() {
 
   function onReaderLoad(event) {
     var obj = JSON.parse(event.target.result);
-    console.log(obj.a);
-
-    chart.data.datasets[0].data.push(obj.a);
-    chart.data.datasets[1].data.push(obj.b);
-
-    console.log(chart.data);
+    chart.data.datasets[0].data = obj.a;
+    chart.data.datasets[1].data = obj.b;
+    chart.update();
   }
 
-  // chart.update();
+  chart.resetZoom();
 }
 
 export { option, dljson, moJson };
