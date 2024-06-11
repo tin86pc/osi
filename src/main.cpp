@@ -10,6 +10,7 @@ ESP8266WebServer sv(80);
 ESP8266HTTPUpdateServer u;      // nạp chương trình qua wifi
 WebSocketsServer webSocket(81); // create a websocket server on port 81
 unsigned long tglm = 1000000;
+boolean bat = false;
 
 #include "data.h"
 #include "ham.h"
@@ -41,6 +42,7 @@ void startWifi()
   tenWifiBat = String(doc["tb"]);
   passWifiBat = String(doc["pb"]);
   tglm = String(doc["T"]).toInt();
+  // tglm=1000000;
 
   WiFi.softAPdisconnect();
   WiFi.disconnect();
@@ -199,18 +201,21 @@ const int potPinA = A0;
 
 void LayMau()
 {
-  int A = analogRead(potPinA);
+  if (bat == true)
+  {
+    int A = analogRead(potPinA);
 
-  int B = random(100, 200);
+    int B = random(100, 200);
 
-  String s = "";
-  JsonDocument doc;
-  doc["A"] = A;
-  doc["B"] = B;
-  serializeJson(doc, s);
+    String s = "";
+    JsonDocument doc;
+    doc["A"] = A;
+    doc["B"] = B;
+    serializeJson(doc, s);
 
-  Serial.println(s);
-  webSocket.broadcastTXT(s);
+    Serial.println(s);
+    webSocket.broadcastTXT(s);
+  }
 }
 
 void setup()

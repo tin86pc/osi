@@ -3,12 +3,21 @@ import { toast, htnut, ghijson, layDuLieu } from "./1ham.js";
 import { option, dljson, moJson } from "./2bieudo.js";
 import { send } from "./5sk.js";
 
-
-layDuLieu("/caidat.json").then(cd => {
+layDuLieu("/caidat.json").then((cd) => {
   document.getElementById("ts").value = cd.T;
-})
+});
 
-
+document.getElementById("bat").addEventListener("click", (e) => {
+  const v = htnut(e.target.id);
+  if (v == true) {
+    send("bat");
+    return;
+  }
+  if (v == false) {
+    send("tat");
+    return;
+  }
+});
 
 document.getElementById("caidat").addEventListener("click", () => {
   window.open("/s", "_blank");
@@ -22,10 +31,10 @@ document.getElementById("ok").addEventListener("click", () => {
   }
   send(nck);
 
-  layDuLieu("/caidat.json").then(cd => {
+  layDuLieu("/caidat.json").then((cd) => {
     cd.T = nck;
     ghijson("caidat.json", cd);
-  })
+  });
 });
 
 document.getElementById("reset_zoom").addEventListener("click", (e) => {
@@ -67,4 +76,3 @@ document.getElementById("mo").addEventListener("click", (e) => {
   toast("Mở");
   moJson();
 });
-

@@ -2,12 +2,23 @@
 
 void batdauketnoi()
 {
+  bat=false;
   Serial.println("bat dau ket noi. ");
   webSocket.broadcastTXT("bat dau ket noi. ");
 }
 
 void xulylenh(String s)
 {
+  if (s == "bat")
+  {
+    bat = true;
+    return;
+  }
+  if (s == "tat")
+  {
+    bat = false;
+    return;
+  }
   int iv = s.toInt();
   Serial.println(iv);
   tglm = iv;
