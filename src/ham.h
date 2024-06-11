@@ -18,13 +18,13 @@ String getContentType(String filename)
   return "";
 }
 
-
 typedef void (*ConTroHam)();
 
 unsigned long previousMillis = 0;
 void nhay(unsigned long interval, ConTroHam func)
 {
-  unsigned long currentMillis = millis();
+  // unsigned long currentMillis = millis();
+  unsigned long currentMillis = micros();
 
   if (currentMillis - previousMillis > interval)
   {
@@ -32,4 +32,3 @@ void nhay(unsigned long interval, ConTroHam func)
     func();
   }
 }
-

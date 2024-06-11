@@ -17,6 +17,7 @@ function skSocket(cb) {
 
 socket.addEventListener("open", (event) => {
   console.log("WebSocket Connect");
+  os.zoom
 });
 
 socket.addEventListener("error", (event) => {

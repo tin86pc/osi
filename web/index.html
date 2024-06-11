@@ -1,175 +1,176 @@
 <!DOCTYPE html>
 <html lang="vi" id="root">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="./favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Osi</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="https://zimnikov.ru/dl/chartjs-plugin-zoom.min.js"></script>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="./favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osi</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script src="https://zimnikov.ru/dl/chartjs-plugin-zoom.min.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      background-color: rgb(255, 255, 255);
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /* toast */
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: rgb(255, 255, 255);
+    }
+
+    .flex>div {
+      background-color: #f1f1f1;
+      margin: 4px;
+      text-align: center;
+    }
+
+    .bat {
+      background-color: green;
+    }
+
+    .tat {
+      background-color: red;
+    }
+
+    #snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333333b7;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+    }
+
+    #snackbar.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
       }
 
-      canvas {
-        background-color: rgb(255, 255, 255);
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-      }
-
-      /* toast */
-      .flex {
-        display: flex;
-        flex-wrap: wrap;
-        background-color: rgb(255, 255, 255);
-      }
-
-      .flex > div {
-        background-color: #f1f1f1;
-        margin: 4px;
-        text-align: center;
-      }
-
-      .bat {
-        background-color: green;
-      }
-      .tat {
-        background-color: red;
-      }
-
-      #snackbar {
-        visibility: hidden;
-        min-width: 250px;
-        margin-left: -125px;
-        background-color: #333333b7;
-        color: #fff;
-        text-align: center;
-        border-radius: 2px;
-        padding: 16px;
-        position: fixed;
-        z-index: 1;
-        left: 50%;
+      to {
         bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
       }
 
-      #snackbar.show {
-        visibility: visible;
-        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
       }
 
-      @-webkit-keyframes fadein {
-        from {
-          bottom: 0;
-          opacity: 0;
-        }
-        to {
-          bottom: 30px;
-          opacity: 1;
-        }
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
       }
 
-      @keyframes fadein {
-        from {
-          bottom: 0;
-          opacity: 0;
-        }
-        to {
-          bottom: 30px;
-          opacity: 1;
-        }
+      to {
+        bottom: 0;
+        opacity: 0;
       }
+    }
+  </style>
+</head>
 
-      @-webkit-keyframes fadeout {
-        from {
-          bottom: 30px;
-          opacity: 1;
-        }
-        to {
-          bottom: 0;
-          opacity: 0;
-        }
-      }
-
-      @keyframes fadeout {
-        from {
-          bottom: 30px;
-          opacity: 1;
-        }
-        to {
-          bottom: 0;
-          opacity: 0;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="snackbar">Some text some message..</div>
-    <div
-      style="
+<body>
+  <div id="snackbar">Some text some message..</div>
+  <div style="
         position: absolute;
         height: 95%;
         width: 95%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-      "
-    >
-      <div class="flex">
-        <div>
-          <button id="caidat">Cài đặt</button>
-        </div>
-        <div>
-          <button id="reset_zoom">Reset Zoom</button>
-        </div>
-
-        <div>
-          <input
-            id="ts"
-            placeholder="Tần số lấy mẫu"
-            min="1"
-            type="number"
-            style="width: 100px; text-align: center"
-          />
-        </div>
-        <div>
-          <button id="ok">ok</button>
-        </div>
-        <div>
-          <button id="a" class="bat">kênh A</button>
-        </div>
-        <div>
-          <button id="b" class="bat">kênh B</button>
-        </div>
-        <div>
-          <button id="zoom" class="bat">Zoom</button>
-        </div>
-        <div>
-          <button id="pan" class="bat">Pan</button>
-        </div>
-        <div>
-          <button id="reset">Reset</button>
-        </div>
-
-        <div>
-          <button id="luu">Lưu</button>
-        </div>
-        <div>
-          <button id="mo">Mở</button>
-        </div>
-
-
+      ">
+    <div class="flex">
+      <div>
+        <button id="caidat">Cài đặt</button>
+      </div>
+      <div>
+        <button id="reset_zoom">Reset Zoom</button>
       </div>
 
-      <canvas id="chart" style="height: 95%; width: 100%"></canvas>
+      <div>
+        <input id="ts" min="1" type="number" style="width: 80px; text-align: center" />
+        <label for="ts">(us)</label><br>
+      </div>
+      <div>
+        <button id="ok" style="width: 50px">ok</button>
+      </div>
+      <div>
+        <button id="a" class="bat">kênh A</button>
+      </div>
+      <div>
+        <button id="b" class="bat">kênh B</button>
+      </div>
+      <div>
+        <button id="zoom" class="bat">Zoom</button>
+      </div>
+      <div>
+        <button id="pan" class="bat">Pan</button>
+      </div>
+      <div>
+        <button id="reset">Reset</button>
+      </div>
+
+      <div>
+        <button id="luu">Lưu</button>
+      </div>
+      <div>
+        <button id="mo">Mở</button>
+      </div>
+
+
     </div>
 
-    <script src="main.js" type="module"></script>
-  </body>
+    <canvas id="chart" style="height: 95%; width: 100%"></canvas>
+  </div>
+
+  <script src="main.js" type="module"></script>
+</body>
+
 </html>

@@ -1,21 +1,17 @@
 "use strict";
-import { toast, htnut, ghijson } from "./1ham.js";
-import { send, skSocket } from "./5sk.js";
+import { ghijson, layDuLieu } from "./1ham.js";
+
 
 let caidat = {};
 
-async function layDuLieu() {
-  const response = await fetch("/caidat.json");
-  const obj = await response.json();
+layDuLieu("/caidat.json").then(obj => {
   caidat = Object.assign(obj);
 
   Object.keys(caidat).forEach(function (key) {
     set(key, caidat[key]);
   });
-}
+})
 
-
-layDuLieu();
 
 function get(id) {
   if (document.getElementById(id)) {
@@ -69,5 +65,5 @@ window.onload = (e) => {
 };
 
 chonWifi.addEventListener("change", (e) => {
-  set("tb", event.target.value);
+  set("tb", e.target.value);
 });

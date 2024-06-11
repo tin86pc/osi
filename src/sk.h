@@ -10,7 +10,7 @@ void xulylenh(String s)
 {
   int iv = s.toInt();
   Serial.println(iv);
-  tglm=iv;
+  tglm = iv;
 }
 
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)

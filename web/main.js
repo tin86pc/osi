@@ -1,7 +1,14 @@
 "use strict";
-import { toast, htnut, ghijson, ngay } from "./1ham.js";
-import { option, dljson,moJson } from "./2bieudo.js";
+import { toast, htnut, ghijson, layDuLieu } from "./1ham.js";
+import { option, dljson, moJson } from "./2bieudo.js";
 import { send } from "./5sk.js";
+
+
+layDuLieu("/caidat.json").then(cd => {
+  document.getElementById("ts").value = cd.T;
+})
+
+
 
 document.getElementById("caidat").addEventListener("click", () => {
   window.open("/s", "_blank");
@@ -15,7 +22,10 @@ document.getElementById("ok").addEventListener("click", () => {
   }
   send(nck);
 
-  toast("Đã lưu tần số lấy mẫu " + nck + " Hz");
+  layDuLieu("/caidat.json").then(cd => {
+    cd.T = nck;
+    ghijson("caidat.json", cd);
+  })
 });
 
 document.getElementById("reset_zoom").addEventListener("click", (e) => {

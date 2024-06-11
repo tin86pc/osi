@@ -1,6 +1,6 @@
 // https://codepen.io/lirik90/pen/rNLqMVg
-import { send, skSocket } from "./5sk.js";
-import { toast, htnut, ngay } from "./1ham.js";
+import { skSocket } from "./5sk.js";
+import { ngay } from "./1ham.js";
 
 var ctx = document.getElementById("chart").getContext("2d");
 

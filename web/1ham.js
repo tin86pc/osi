@@ -36,7 +36,7 @@ function ghijson(t, d) {
     body: formData,
   }).then((response) => {
     if (response.status == 200) {
-      alert("lưu thành công");
+      toast("lưu thành công");
     }
   });
 }
@@ -50,4 +50,12 @@ function ngay() {
   return currentDate;
 }
 
-export { toast, htnut, ghijson, ngay };
+async function layDuLieu(s) {
+  const response = await fetch(s);
+  const obj = await response.json();
+  return Object.assign(obj);
+}
+
+
+
+export { toast, htnut, ghijson, ngay, layDuLieu };
