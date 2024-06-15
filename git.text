@@ -1,4 +1,12 @@
 git init
+git add .
 git commit -m ""
-git remote add origin 
-git push -u origin master
+
+git checkout -m nhanh2
+git checkout nhanh2
+git push origin nhanh2
+
+
+git remote add origin https://github.com/tin86pc/osi.git
+git push origin nhanh2
+git push
