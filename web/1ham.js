@@ -54,7 +54,7 @@ async function layDuLieu(s) {
   try {
     const response = await fetch(s);
     const obj = await response.json();
-    return Object.assign(obj);
+    return obj
   } catch (error) {
     return false;
   }

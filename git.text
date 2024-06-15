@@ -9,4 +9,5 @@ git push origin nhanh2
 
 git remote add origin https://github.com/tin86pc/osi.git
 git push origin nhanh2
+git push -u origin nhanh2
 git push
