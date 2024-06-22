@@ -11,3 +11,10 @@ git remote add origin https://github.com/tin86pc/osi.git
 git push origin nhanh2
 git push -u origin nhanh2
 git push
+https://github.com/esp8266/Arduino/issues/8155
+
+https://www.instructables.com/How-to-Use-ESP8266-As-Webserver/
+https://github.com/esp8266/Arduino/issues/3966
+
+
+littlefs update  large file

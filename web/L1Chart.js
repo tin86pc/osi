@@ -1234,7 +1234,6 @@
       return fn(args);
     };
 
-    // preserve .conversion property if there is one
     if ("conversion" in fn) {
       wrappedFn.conversion = fn.conversion;
     }

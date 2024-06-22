@@ -11,9 +11,9 @@ ESP8266HTTPUpdateServer u;      // nạp chương trình qua wifi
 WebSocketsServer webSocket(81); // create a websocket server on port 81
 unsigned long tglm = 1000000;
 boolean bat = false;
-
-#include "data.h"
 #include "ham.h"
+#include "data.h"
+
 #include "sk.h"
 
 void startWifi()
@@ -31,7 +31,7 @@ void startWifi()
   if (error)
   {
     Serial.print(F("deserializeJson() failed: "));
-    Serial.println(error.f_str());    
+    Serial.println(error.f_str());
   }
   else
   {
@@ -41,7 +41,6 @@ void startWifi()
     passWifiBat = String(doc["pb"]);
     tglm = String(doc["T"]).toInt();
   }
-
 
   WiFi.softAPdisconnect();
   WiFi.disconnect();
@@ -92,10 +91,10 @@ void startWifi()
 void startServer()
 {
   sv.on("/", []()
-        { sv.send(200, "text/html", getFile("index.html")); });
+        { GuiFile("index.html"); });
 
   sv.on("/s", []()
-        { sv.send(200, "text/html", getFile("setting.html")); });
+        { GuiFile("setting.html"); });
 
   sv.on("/r", []()
         {
@@ -106,7 +105,7 @@ void startServer()
   sv.on("/x", []()
         {
           fomatAll();
-          sv.send(200,"text/html","Format ok."); });
+          sv.send(404, "text/html", "<a href='/u'>Fomat ok</a>"); });
 
   sv.on("/w", []()
         { 
@@ -162,35 +161,26 @@ void startServer()
         HTTPUpload &file = sv.upload();
         if (file.status == UPLOAD_FILE_START)
         {
-          Serial.println("ghi file " + file.filename);
+          Serial.println("Ghi file " + file.filename);
           clearFile(file.filename);
         }
         else if (file.status == UPLOAD_FILE_WRITE)
         {
-          Serial.println("dang gui");
+          Serial.println("Dang gui");
           saveFile(file.filename, file.buf, file.currentSize);
         }
         else if (file.status == UPLOAD_FILE_END)
         {
-          Serial.println("gui file song");
+          Serial.println("Gui file song");
         }
       });
 
   // sv.on("/test", chay);
 
   sv.onNotFound([]()
-                {
-                  String uri = sv.uri();
-                  String nf = uri.substring(1);
-                  String lf = getContentType(nf);
-                  if (lf != "")
-                  {
-                    sv.send(200, lf, getFile(nf));
-                  }
-                  else
-                  {
-                    sv.send(404, "text/html", "Error 404 NOT FOUND");
-                  } });
+                { 
+    if(!handleFileRead(sv.uri()))
+    sv.send(404, "text/html", "<a href='/'>Loi khong tim thay file </a>"); });
 
   sv.begin();
 }

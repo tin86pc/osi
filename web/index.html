@@ -7,14 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Osi</title>
 
-  <script src="./lib/Chart.js"></script>
-  <script src="./lib/hammer.min.js"></script>
-  <script src="./lib/chartjs-plugin-zoom.min.js"></script>
+  <script src="./L1Chart.js"></script>
+  <script src="./L2Hammer.js"></script>
+  <script src="./L3Zoom.js"></script>
 
+  <!-- 
 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.7/hammer.js"></script>
-  <script src="https://zimnikov.ru/dl/chartjs-plugin-zoom.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+  <script src="https://zimnikov.ru/dl/chartjs-plugin-zoom.min.js"></script> 
+  
+  -->
 
   <style>
     * {
@@ -126,11 +129,12 @@
   <div id="snackbar">Some text some message..</div>
   <div style="
         position: absolute;
-        height: 95dvh;
-        width: 95dvw;
+        height: 100dvh;
+        width: 100dvw;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        background-color: aqua;
       ">
     <div class="flex">
       <div>
@@ -174,7 +178,8 @@
       </div>
     </div>
 
-    <canvas id="chart" style="height: 87%; width: 96%"></canvas>
+    <canvas id="chart" style="background-color: rgb(109, 128, 66);height: 92%; width: 100%"></canvas>
+
   </div>
 
   <script src="main.js" type="module"></script>
