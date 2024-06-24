@@ -1,5 +1,5 @@
 "use strict";
-import { toast, htnut, ghijson, layDuLieu } from "./1ham.js";
+import { toast, htnut, ghijson, layDuLieu, openFullscreen, closeFullscreen } from "./1ham.js";
 import { option, dljson, moJson } from "./2bieudo.js";
 import { send } from "./5sk.js";
 
@@ -84,3 +84,20 @@ document.getElementById("mo").addEventListener("click", (e) => {
   toast("Mở");
   moJson();
 });
+
+document.getElementById("fs").addEventListener("click", (e) => {
+  const v = htnut(e.target.id);
+  option("fs", v);
+
+  if (v) {
+    openFullscreen();
+  }
+  else {
+    closeFullscreen();
+  }
+
+
+
+});
+
+
